@@ -1,0 +1,23 @@
+{% extends 'smartmovers/base.html'%}
+<html>
+{% block content%}
+<div class="jumbotron text-center">
+
+    <h5>Post Details</h5>
+
+    <div class="card m-5 text-center">
+        <div><img class="post-image rounded " src="{{post.image.url}}" alt=""></div>
+        <li> Name : {{post.name}}</li>
+        <li>Location : {{post.location}}</li>
+        <li>Mobile No : {{post.phone}}</li>
+        <li> Availability Status : {{post.availability}}</li>
+        <li> Vehicle type: {{post.vehicle_type}}</li>
+        <div class=" card-body ">
+            {% if post.author == user %}
+            <a class=" btn btn-secondary " href="{% url 'update' post.id%}">Update</a>
+            <a class=" btn btn-danger " href="{%url 'delete' post.id %}">Delete</a> {% endif%}
+        </div>
+    </div>
+</div>{% endblock content%}
+
+</html>

@@ -1,0 +1,11 @@
+.profile-pic {
+    width: 150px;
+    height: 150px;
+}
+
+.post-image {
+    height: 250px;
+    width: 100%;
+    margin: 10px;
+    border-radius: 10px;
+}
