@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'smartmovers.apps.SmartmoversConfig',
     'crispy_forms',
     'django_filters',
+    
+
 ]
 
 MIDDLEWARE = [
@@ -133,3 +135,6 @@ LOGIN_REDIRECT_URL = 'homepage'
 LOGIN_URL='login'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# STAR_RATINGS_RERATE = True
+# STAR_RATINGS_RERATE_SAME_DELETE  = True

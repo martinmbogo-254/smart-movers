@@ -4,7 +4,7 @@
         <h4>Delete Post</h4>
         <form action="" method="post">
             {% csrf_token %}
-            <h3>Are you sure you want to delete the post by "{{post.name.upper}}" ?</h3>
+            <h4>Are you sure you want to delete the post by "{{post.name.upper}}" ?</h4>
             <button type="submit" class="btn btn-danger">Yes, Delete</button>
             <a href="{% url 'detail' post.id%}" class="btn btn-secondary">Cancel</a>
         </form>

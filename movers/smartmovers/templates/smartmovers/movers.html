@@ -3,7 +3,7 @@
 {% block content%}
 <div class="search container">
     <div class="row">
-        <form class="form-inline my-2 my-lg-0" method="GET">
+        <form class="form-inline my-2 my-lg-0 p-2 m-2" method="GET">
             {{myFilter.form|crispy}}
 
             <button type="submit" class="btn btn-info">search</button>
@@ -20,14 +20,22 @@
     <div class="col-md-6 m-2 p-3 text-justify">
         <ul>
             <a href="{% url 'detail' post.id%}">
-                <li> Name :{{post.name}}</li>
+                <li> Name :{{post.name|title}}</li>
             </a>
             <li>Location : {{post.location}}</li>
             <li>Mobile No : {{post.phone}}</li>
             <li> Availability Status : {{post.availability}}</li>
             <li> Vehicle type: {{post.vehicle_type}}</li>
         </ul>
+        <div>
+          <li>posted by: {{post.author}}</li>
+        </div>
+        <div class="text-center m-2p-1">
+          <p>Rating : ***</p>
+          <p>Share card</p>
+        </div>
     </div>
+
 </div>
 {% empty%}
 <div class="text-center bg-white shadow-lg  rounded p-3 ml-4 container">
@@ -35,7 +43,23 @@
 </div>
 {% endfor %}
 </div>
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a class="btn btn-outline-info" href="?page=1">&laquo; first</a>
+            <a class="btn btn-info" href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
 
+        <span class="current">
+            Page {{ page_obj.number }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a class="btn btn-info" href="?page={{ page_obj.next_page_number }}">next</a>
+            <a class="btn btn-info" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
 {% endblock content%}
 
 </html>

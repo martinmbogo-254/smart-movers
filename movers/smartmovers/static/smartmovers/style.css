@@ -1,3 +1,6 @@
+body{
+
+}
 .profile-pic {
     width: 150px;
     height: 150px;
@@ -8,4 +11,8 @@
     width: 100%;
     margin: 10px;
     border-radius: 10px;
+}
+.detail-img{
+  height: 450px;
+  width: 450px;
 }

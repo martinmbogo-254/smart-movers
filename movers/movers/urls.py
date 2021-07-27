@@ -25,6 +25,7 @@ urlpatterns = [
     path('',include('smartmovers.urls' )),
     path('register/', user_views.register),
     path('profile/', user_views.profile, name='profile'),
+    # path(r'^ratings/', include('star_ratings.urls'), name='ratings'),
     path('login', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout', auth_views.LogoutView.as_view(template_name='smartmovers/home.html'), name='logout')
 ]
