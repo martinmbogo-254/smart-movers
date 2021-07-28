@@ -10,7 +10,9 @@ from .filters import MoversFilter
 # Create your views here.
 def homepage(request):
     return render(request, 'smartmovers/home.html')
-#
+
+
+
 @login_required
 def movers_list(request):
     context_object_name = 'posts'

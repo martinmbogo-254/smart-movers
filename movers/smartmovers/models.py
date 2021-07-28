@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
-# from django.datetime import DateTimeField
+
 
 # Create your models here.
 
@@ -18,7 +18,7 @@ class Post(models.Model):
     vehicle_type= models.CharField(max_length=100,null=False)
     image = models.ImageField(upload_to='movers_pics/')
     description = models.TextField(max_length=150,null=True)
-    # posted = models.DateTimeField(auto_now_add=True)
+    
     least_price = models.IntegerField(null=True)
 
     def __str__(self):
