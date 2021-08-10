@@ -1,10 +1,15 @@
-from django.shortcuts import render
+from typing import Reversible
+from django.http.response import HttpResponseRedirect
+from django.shortcuts import render,redirect
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
-from .models import Post
+from .models import Post , Rating
 from .filters import MoversFilter
+from .forms import RateForm
+from django.urls import reverse
+from django.db.models import Avg
 
 
 # Create your views here.
@@ -71,7 +76,7 @@ class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
             return False
 
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
     model = Post
     template_name= 'smartmovers/post_delete_confirm.html'
     success_url = '/post/movers'
@@ -83,3 +88,34 @@ class PostDeleteView(DeleteView):
             return True
         else:
             return False
+
+@login_required
+def Rate(request,pk):
+    #getting post objects by their id
+    post = Post.objects.get(id=pk)
+    post_data = Post.objects.get(id=pk)
+    ratings = Rating.objects.filter(post = post_data)
+    average_ratings = ratings.aggregate(Avg('rate'))
+    total_ratings = ratings.count()
+    user  = request.user
+    #form method
+    if request.method == 'POST':
+        form = RateForm(request.POST)
+    #validating the form.
+        if form.is_valid():
+            rate =form.save()
+            rate.post =post
+            rate.user  = user
+            rate.save()
+
+            return HttpResponseRedirect(reverse('detail',args=[pk]))
+    else:
+        form = RateForm()
+    context = {
+        'form': form,
+        'post':post,
+        'average_ratings':average_ratings,
+        'ratings':ratings,
+        'total_ratings':total_ratings,
+        }
+    return render(request, 'smartmovers/rate.html', context)

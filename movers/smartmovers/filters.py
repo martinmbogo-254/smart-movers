@@ -5,7 +5,7 @@ from .models import *
 
 class MoversFilter(django_filters.FilterSet):
     
-    name=CharFilter(field_name='name', lookup_expr='icontains')
+    # name=CharFilter(field_name='name', lookup_expr='icontains')
     class Meta:
         model = Post
         fields = {'location':['icontains']}

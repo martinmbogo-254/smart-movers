@@ -1,0 +1,40 @@
+{% extends 'smartmovers/base.html'%} {% load crispy_forms_tags%}
+<html>
+{% block content%}
+<div class="container">
+    <div class="container">
+        <a href="{% url 'movers'%}">Home</a>
+    </div>
+    <div class="row">
+        <div class="col-md-7 container">
+            <img class="rounded" src="{{post.image.url}}" style="height:450px" width="100%" alt="">
+        </div>
+        <div class="col-md-4 container-fluid">
+            <div class="card text-center p-2  rounded shadow m-3">
+                <P>{{post.name|title}}</P>
+                <p>Availability Status:{{post.availability}}</p>
+                <p>Location: {{post.location}}</p>
+                <button class="btn btn-outline-primary">{{post.phone}}</button>
+            </div>
+            <div class="card text-justify p-2  rounded shadow m-3">
+                <p>Desc: {{post.description}}</p>
+
+                <p>Lowest Price: {{post.least_price}}</p>
+
+            </div>
+            <div class="card text-justify p-2 m-2 rounded shadow m-3">
+                <form method="POST">
+                    {% csrf_token%}
+                    <div class="input-field">
+                        {{form.comment|as_crispy_field}}
+                    </div>
+                    <div class="input-field">
+                        {{form.rate|as_crispy_field}}
+                    </div>
+                    <button type="submit" class="btn text-center btn-info">save</button>
+                </form>
+            </div>
+        </div>
+        {% endblock content%}
+
+</html>

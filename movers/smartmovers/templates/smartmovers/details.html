@@ -14,7 +14,14 @@
                 <P>{{post.name|title}}</P>
                 <p>Availability Status:{{post.availability}}</p>
                 <p>Location: {{post.location}}</p>
-                <button class="btn btn-outline-primary">{{post.phone}}</button>
+                <div class="row">
+                    <div class="col-md-5 m-2">
+                        <button class="btn btn-primary">{{post.phone}}</button>
+                    </div>
+                    <div class="col-md-5 m-2">
+                        <button class="btn btn-success">Call Mover</button>
+                    </div>
+                </div>
             </div>
             <div class="card text-justify p-2  rounded shadow m-3">
                 <p>Desc: {{post.description}}</p>
@@ -25,10 +32,6 @@
             <div class="card text-justify p-2 m-2 rounded shadow m-3">
                 <p>Share this contact on social media</p>
                 <button class="btn btn-info m-1">facebook</button>
-                <!--  <button class="btn btn-light m-1">instagram</button>-->
-                <!--  <button class="btn btn-secondary m-1">twitter</button>-->
-                <!--  <button class="btn btn-primary m-1">whatsapp</button>-->
-
 
             </div>
             {% if post.author == user %}
@@ -43,16 +46,30 @@
 
         </div>
     </div>
-    <div class=" jumbotron container ">
-        <h4 class="text-center"> Feedback</h4>
-        {% for rating in post.rating.all%}
+    <div class=" bg-white col-md-10 shadow-lg rounded container-fluid ">
+        <h5 class="text-center m-3 p-2"> Feedback about <a href="">{{post.name}}</a></h5>
+        <a href=" {% url 'rate' post.id%}" class="btn btn-info p-2 m-2 text-center">
+            Leave feedback 
+        </a>
+        <p>Rating: {{ratings_avg }}/5</p>
+        {% for rating in post.rating.all reversed%}
         <p>
-            <span> 
-    <img class="rounded-circle profile-pic " style="width: 50px;height:50px;" src="{{ rating.author.profile.image.url}} " alt=" ">
-</span>
+
+            <span>
+                 <img class="rounded-circle profile-pic " style="width: 30px;height:30px;" src="{{ rating.user.profile.image.url}} " alt=" ">
+             </span>
             <span class=font-weight-bold>
-    {{rating.author}}  :</span> {{rating.comment}} <br> {{rating.rate}}
+             {{rating.user}} </span>
+            <div class=" container text-justify m-2 p-2">
+                {{rating.comment|title}} <br> {{rating.rate}}/5
+            </div>
         </p>
+
+        {% empty%}
+        <div class="text-center m-2 p-2">
+            <p>No ratings for this Mover's page Yet !!!.</p>
+
+        </div>
         {% endfor%}
     </div>
 </div>

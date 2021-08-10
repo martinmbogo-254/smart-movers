@@ -6,7 +6,7 @@
         <form class="form-inline my-2 my-lg-0 p-2 m-2" method="GET">
             {{myFilter.form|crispy}}
 
-            <button type="submit" class="btn btn-info">search</button>
+            <button type="submit" class="btn btn-info m-2">search</button>
         </form>
     </div>
 </div>
@@ -28,11 +28,11 @@
             <li> Vehicle type: {{post.vehicle_type}}</li>
         </ul>
         <div>
-          <li>posted by: {{post.author}}</li>
+            <li>posted by: {{post.author}}</li>
         </div>
         <div class="text-center m-2p-1">
-          <p>Rating : ***</p>
-          <p>Share card</p>
+            <p>Rating : ***</p>
+            <p>Share card</p>
         </div>
     </div>
 
@@ -42,23 +42,6 @@
     <h4 class="text-danger">Sorry. No result found for your Search !!!</h4>
 </div>
 {% endfor %}
-</div>
-<div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a class="btn btn-outline-info" href="?page=1">&laquo; first</a>
-            <a class="btn btn-info" href="?page={{ page_obj.previous_page_number }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ page_obj.number }}.
-        </span>
-
-        {% if page_obj.has_next %}
-            <a class="btn btn-info" href="?page={{ page_obj.next_page_number }}">next</a>
-            <a class="btn btn-info" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
 </div>
 {% endblock content%}
 
