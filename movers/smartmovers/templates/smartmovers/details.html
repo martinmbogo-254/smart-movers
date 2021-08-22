@@ -1,4 +1,4 @@
-{% extends 'smartmovers/base.html'%}
+{% extends 'smartmovers/base.html'%} {% load social_share %}
 <html>
 {% block content%}
 <div class="container">
@@ -10,28 +10,31 @@
             <img class="rounded" src="{{post.image.url}}" style="height:450px" width="100%" alt="">
         </div>
         <div class="col-md-4 container-fluid">
-            <div class="card text-center p-2  rounded shadow m-3">
-                <P>{{post.name|title}}</P>
-                <p>Availability Status:{{post.availability}}</p>
-                <p>Location: {{post.location}}</p>
+            <div class="card text-justify p-2  rounded shadow m-3">
+                <P>
+                    <span class="badge badge-pill p-2 badge-success ">Mover Name</span> {{post.name|title}}</P>
+                <p> <span class="badge badge-pill badge-primary p-2">Availability Status</span> {{post.availability}}</p>
+                <p><span class="badge badge-pill badge-secondary  p-2">Location</span> {{post.location|title}}</p>
                 <div class="row">
-                    <div class="col-md-5 m-2">
-                        <button class="btn btn-primary">{{post.phone}}</button>
+                    <div class="col-md-5 m-1">
+                        <button class="btn btn-outline-primary">+254{{post.phone}}</button>
                     </div>
-                    <div class="col-md-5 m-2">
-                        <button class="btn btn-success">Call Mover</button>
+                    <div class="col-md-5 m-1">
+                        <button class="btn btn-success">sms mover</button>
                     </div>
                 </div>
             </div>
             <div class="card text-justify p-2  rounded shadow m-3">
-                <p>Desc: {{post.description}}</p>
+                <p>About : {{post.description}}</p>
 
-                <p>Lowest Price: {{post.least_price}}</p>
+                <p>Least Price: {{post.least_price}}</p>
 
             </div>
             <div class="card text-justify p-2 m-2 rounded shadow m-3">
                 <p>Share this contact on social media</p>
-                <button class="btn btn-info m-1">facebook</button>
+                <button class="btn btn-success m-1 nav-link text-light">
+                    {% post_to_whatsapp object_or_url "Share To Whatsapp" %}
+                </button>
 
             </div>
             {% if post.author == user %}
@@ -46,25 +49,32 @@
 
         </div>
     </div>
-    <div class=" bg-white col-md-10 shadow-lg rounded container-fluid ">
+    <div class=" bg-white col-md-10 shadow-lg rounded p-2 container-fluid feedback ">
         <h5 class="text-center m-3 p-2"> Feedback about <a href="">{{post.name}}</a></h5>
         <a href=" {% url 'rate' post.id%}" class="btn btn-info p-2 m-2 text-center">
-            Leave feedback 
+            Leave feedback
         </a>
-        <p>Rating: {{ratings_avg }}/5</p>
+        <div class="p-2 m-2">
+            <p>Rated: {{average_ratings.rate__avg|floatformat}}/5</p>
+            <p>{{total_ratings}} Reviews</p>
+        </div>
         {% for rating in post.rating.all reversed%}
-        <p>
-
-            <span>
+        <div class="row ml-2">
+            <div class="container m-2 ml-3 p-2   col-md-9  rounded bg-dark shadow text-light">
+                <p>
+                    <span>
                  <img class="rounded-circle profile-pic " style="width: 30px;height:30px;" src="{{ rating.user.profile.image.url}} " alt=" ">
              </span>
-            <span class=font-weight-bold>
+                    <span class=font-weight-bold>
              {{rating.user}} </span>
-            <div class=" container text-justify m-2 p-2">
-                {{rating.comment|title}} <br> {{rating.rate}}/5
+                    <span class="ml-5">Feedback</span>
+                    <div class=" container text-justify ">
+                        {{rating.comment|title}} <br>Rated : {{rating.rate}}/5
+                    </div>
+                </p>
             </div>
-        </p>
-
+            <div class="col-md-2"></div>
+        </div>
         {% empty%}
         <div class="text-center m-2 p-2">
             <p>No ratings for this Mover's page Yet !!!.</p>
@@ -72,6 +82,7 @@
         </div>
         {% endfor%}
     </div>
+</div>
 </div>
 {% endblock content%}
 

@@ -6,7 +6,7 @@
         <form class="form-inline my-2 my-lg-0 p-2 m-2" method="GET">
             {{myFilter.form|crispy}}
 
-            <button type="submit" class="btn btn-info m-2">search</button>
+            <button type="submit"  class="btn btn-info m-2">search</button>
         </form>
     </div>
 </div>
@@ -28,10 +28,10 @@
             <li> Vehicle type: {{post.vehicle_type}}</li>
         </ul>
         <div>
-            <li>posted by: {{post.author}}</li>
+            <li>posted: {{post.posted}}</li>
         </div>
         <div class="text-center m-2p-1">
-            <p>Rating : ***</p>
+            <p>Rated :{{average_ratings}}/5</p>
             <p>Share card</p>
         </div>
     </div>

@@ -3,7 +3,7 @@
 {% block content%}
 <div class="container">
     <div class="container">
-        <a href="{% url 'movers'%}">Home</a>
+        <a href="{% url 'detail' post.id%}">Back</a>
     </div>
     <div class="row">
         <div class="col-md-7 container">
@@ -16,12 +16,7 @@
                 <p>Location: {{post.location}}</p>
                 <button class="btn btn-outline-primary">{{post.phone}}</button>
             </div>
-            <div class="card text-justify p-2  rounded shadow m-3">
-                <p>Desc: {{post.description}}</p>
 
-                <p>Lowest Price: {{post.least_price}}</p>
-
-            </div>
             <div class="card text-justify p-2 m-2 rounded shadow m-3">
                 <form method="POST">
                     {% csrf_token%}

@@ -1,8 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.utils import timezone
 
-
+from twilio.rest import Client
 # Create your models here.
 
 class Post(models.Model):
@@ -16,8 +17,12 @@ class Post(models.Model):
     availability =models.CharField(choices=Availability,max_length=11,null=False)
     phone = models.IntegerField()
     vehicle_type= models.CharField(max_length=100,null=False)
-    image = models.FileField(upload_to='movers_pics/',default='movers_pics/default.jpg')
+    image = models.FileField(default='movers_pics/default.jpg', upload_to='movers_pics/')
     description = models.TextField(max_length=150,null=True)
+    posted = models.DateTimeField( auto_now_add=True,null=True)
+    updated = models.DateTimeField( auto_now=True, null=True)
+
+
 
     least_price = models.IntegerField(null=True)
 
@@ -41,3 +46,27 @@ class Rating(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     rate = models.PositiveSmallIntegerField(choices=RATE_CHOICES,max_length=50, null= True)
     comment = models.CharField(max_length=100, null=True)
+    posted = models.DateTimeField( auto_now_add=True,null= True)
+
+
+class sms (models.Model):
+    name = models.ForeignKey(User,on_delete=models.CASCADE)
+    message = models.CharField(max_length=300,null=True)
+
+    def __str__(self):
+        return self.name.username
+
+    def save(self,*args,**kwargs):
+        account_sid = 'ACd29314508846a743414a69526ab99219'
+        auth_token = '2df4f0ff325a629f4077c25c99b7e2dd'
+        client = Client(account_sid, auth_token)
+
+        message = client.messages.create(
+                            body={self.message},
+                            from_='+17038842547',
+                            to='+254745499838'
+                        )
+
+        print(message.sid)
+        return super().save(*args,**kwargs)
+

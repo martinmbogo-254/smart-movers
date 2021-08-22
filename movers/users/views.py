@@ -7,17 +7,22 @@ from .forms import UserRegistrationForm ,ProfileUpdateForm, UserUpdateForm
 
 
 def register(request):
-    if request.method == 'POST':
-        form = UserRegistrationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request, f'Hello {username}, Your account has been successfully created.. !! You can now login ')
-            return redirect('login')
+    #redirect a user to the hompage if they are already loged in
+    if request.user.is_authenticated:
+        return redirect('movers')
     else:
-        form = UserRegistrationForm()
-    context = {'form': form}
-    return render(request, 'users/register.html', context)
+        #perform this operation if the user is not logged in
+        if request.method == 'POST':
+            form = UserRegistrationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                username = form.cleaned_data.get('username')
+                messages.success(request, f'Hello {username}, Your account has been successfully created.. !! You can now login ')
+                return redirect('login')
+        else:
+            form = UserRegistrationForm()
+        context = {'form': form}
+        return render(request, 'users/register.html', context)
 
 
 @login_required
@@ -29,7 +34,8 @@ def profile(request):
         if u_form.is_valid and p_form.is_valid:
             u_form.save()
             p_form.save()
-            messages.success(request, 'Your profile has been successfully updated !!')
+            username = u_form.cleaned_data.get('username')
+            messages.success(request, f'{username} Your profile has been successfully updated !!')
             return redirect('profile')
     else:
         u_form = UserUpdateForm(instance=request.user, )

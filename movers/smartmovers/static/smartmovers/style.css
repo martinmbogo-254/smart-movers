@@ -1,6 +1,8 @@
-body{
-
+body {
+    margin: 0;
+    padding: 0;
 }
+
 .profile-pic {
     width: 150px;
     height: 150px;
@@ -12,7 +14,8 @@ body{
     margin: 10px;
     border-radius: 10px;
 }
-.detail-img{
-  height: 450px;
-  width: 450px;
+
+.detail-img {
+    height: 450px;
+    width: 450px;
 }

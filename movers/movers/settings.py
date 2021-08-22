@@ -25,7 +25,7 @@ SECRET_KEY = 'acivl-kn00z+64wa3k_qfjuz%@f6hg6ywz(l&l5$_$j-)$g130'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['eeb4-41-89-56-240.ngrok.io']
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'smartmovers.apps.SmartmoversConfig',
     'crispy_forms',
     'django_filters',
+    'django_social_share',
     
 
 ]
