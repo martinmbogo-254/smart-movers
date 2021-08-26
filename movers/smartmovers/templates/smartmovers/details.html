@@ -3,7 +3,8 @@
 {% block content%}
 <div class="container">
     <div class="container">
-        <a href="{% url 'movers'%}">Home</a>
+        <a href="{% url 'movers'%}" class="nav-link"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+             Home</a>
     </div>
     <div class="row">
         <div class="col-md-7 container">
@@ -25,17 +26,17 @@
                 </div>
             </div>
             <div class="card text-justify p-2  rounded shadow m-3">
-                <p>About : {{post.description}}</p>
+                <p><span class="badge badge-pill badge-info  p-2">Description </span> {{post.description}}</p>
 
                 <p>Least Price: {{post.least_price}}</p>
 
             </div>
             <div class="card text-justify p-2 m-2 rounded shadow m-3">
                 <p>Share this contact on social media</p>
-                <button class="btn btn-success m-1 nav-link text-light">
+                <button class="btn btn-outline-success m-1 nav-link text-light">
                     {% post_to_whatsapp object_or_url "Share To Whatsapp" %}
                 </button>
-                <button class="btn btn-info m-1 nav-link text-light">
+                <button class="btn btn-outline-info m-1 nav-link text-light">
                     {% post_to_facebook object_or_url "Share To Facebook" %}
                 </button>
             </div>
@@ -66,7 +67,8 @@
              </span>
                     <span class=font-weight-bold>
              {{rating.user}} </span>
-                    <span class="ml-5">Feedback</span>
+                    <span class="ml-5"><i class="fa fa-comments" aria-hidden="true"></i>
+                    </span>
                     <div class=" container text-justify ">
                         {{rating.comment|title}} <br>Rated : {{rating.rate}}/5
                     </div>

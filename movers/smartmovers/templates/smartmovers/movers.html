@@ -6,7 +6,7 @@
         <form class="form-inline my-2 my-lg-0 p-2 m-2" method="GET">
             {{myFilter.form|crispy}}
 
-            <button type="submit"  class="btn btn-info m-2">search</button>
+            <button type="submit" class="btn btn-info m-2">search</button>
         </form>
     </div>
 </div>
@@ -18,22 +18,15 @@
         <div class=""> <img class="post-image rounded" src="{{post.image.url}}" alt=""></div>
     </div>
     <div class="col-md-6 m-2 p-3 text-justify">
-        <ul>
-            <a href="{% url 'detail' post.id%}">
-                <li> Name :{{post.name|title}}</li>
-            </a>
-            <li>Location : {{post.location}}</li>
-            <li>Mobile No : {{post.phone}}</li>
-            <li> Availability Status : {{post.availability}}</li>
-            <li> Vehicle type: {{post.vehicle_type}}</li>
-        </ul>
-        <div>
-            <li>posted: {{post.posted}}</li>
-        </div>
-        <div class="text-center m-2p-1">
-            <p>Rated :{{average_ratings}}/5</p>
-            <p>Share card</p>
-        </div>
+
+        <a href="{% url 'detail' post.id%} " class="nav-link">
+            <li class="nav-link"><i class="fa fa-user" aria-hidden="true"></i> Name :{{post.name|title}}</li>
+        </a>
+        <li class="nav-link p-2 m-2"><i class="fa fa-map-marker" aria-hidden="true"></i> Location : {{post.location}}</li>
+
+        <li class="nav-link p-2 m-2"><i class="fa fa-mobile" aria-hidden="true"></i> Availability Status : {{post.availability}}</li>
+        <li class="nav-link p-2 m-2"> <i class="fa fa-truck" aria-hidden="true"></i> Vehicle type: {{post.vehicle_type}}</li>
+
     </div>
 
 </div>

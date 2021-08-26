@@ -1,0 +1,1 @@
+web: gunicorn movers.wsgi --log-file -

@@ -17,7 +17,7 @@ class Post(models.Model):
     availability =models.CharField(choices=Availability,max_length=11,null=False)
     phone = models.IntegerField()
     vehicle_type= models.CharField(max_length=100,null=False)
-    image = models.FileField(default='movers_pics/default.jpg', upload_to='movers_pics/')
+    image = models.FileField(upload_to='movers_pics/', default='movers_pics/default.jpg')
     description = models.TextField(max_length=150,null=True)
     posted = models.DateTimeField( auto_now_add=True,null=True)
     updated = models.DateTimeField( auto_now=True, null=True)
