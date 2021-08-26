@@ -22,10 +22,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'acivl-kn00z+64wa3k_qfjuz%@f6hg6ywz(l&l5$_$j-)$g130'
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['eeb4-41-89-56-240.ngrok.io']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -137,5 +138,10 @@ LOGIN_URL='login'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-# STAR_RATINGS_RERATE = True
-# STAR_RATINGS_RERATE_SAME_DELETE  = True
+# smtp configurations
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS =True
+EMAIL_HOST_USER = 'smartmovers276@gmail.com'
+EMAIL_HOST_PASSWORD ='@smartmovers_276'

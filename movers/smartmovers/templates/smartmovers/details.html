@@ -35,7 +35,9 @@
                 <button class="btn btn-success m-1 nav-link text-light">
                     {% post_to_whatsapp object_or_url "Share To Whatsapp" %}
                 </button>
-
+                <button class="btn btn-info m-1 nav-link text-light">
+                    {% post_to_facebook object_or_url "Share To Facebook" %}
+                </button>
             </div>
             {% if post.author == user %}
             <div class="container m-3 p-3">
@@ -44,10 +46,7 @@
             </div>
             {% endif%}
         </div>
-        <div>
 
-
-        </div>
     </div>
     <div class=" bg-white col-md-10 shadow-lg rounded p-2 container-fluid feedback ">
         <h5 class="text-center m-3 p-2"> Feedback about <a href="">{{post.name}}</a></h5>
@@ -60,7 +59,7 @@
         </div>
         {% for rating in post.rating.all reversed%}
         <div class="row ml-2">
-            <div class="container m-2 ml-3 p-2   col-md-9  rounded bg-dark shadow text-light">
+            <div class="container m-2 ml-3 p-2   col-md-8 mr-2 rounded bg-light shadow text-dark">
                 <p>
                     <span>
                  <img class="rounded-circle profile-pic " style="width: 30px;height:30px;" src="{{ rating.user.profile.image.url}} " alt=" ">
